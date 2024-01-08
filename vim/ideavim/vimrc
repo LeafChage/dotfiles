@@ -1,0 +1,13 @@
+let mapleader = " "
+
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>j :action GotoDeclaration<CR>
+nnoremap <Leader>r :action ShowUsages<CR>
+nnoremap <Leader>f :action ReformatCode<CR>
+
+nnoremap <C-^> :action Back<CR>
+nnoremap <C-z> :action CommentByLineComment<CR>
+vnoremap <C-z> :action CommentByLineComment<CR>
+

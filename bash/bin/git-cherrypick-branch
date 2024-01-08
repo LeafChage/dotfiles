@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+
+#####
+# ブランチを指定してそのブランチをCherryPickするシェルを作成する
+#####
+
+type git 1>/dev/null 2>/dev/null || echo "need git"
+type peco 1>/dev/null 2>/dev/null || echo "need peco"
+
+function error(){
+    echo "$1"
+    exit 1
+}
+
+function choice_branch() {
+    git branch --format="%(refname:short)" | peco --prompt "choice target branch"
+}
+
+function choice_commits() {
+    git log "$1" --format="%H [%cn] %s (%cd)" | peco --prompt "choice latest commit to include "| cut -d' ' -f1
+}
+
+function target_commits() {
+    for h in $(git log "$branch" --format="%H"); do
+        echo "$h"
+        if [ "$h" = "$commithash" ]; then
+            break
+        fi
+    done
+}
+
+branch="$(choice_branch)"
+commithash="$(choice_commits "$branch")"
+
+echo "#!/bin/bash"
+echo "set -euo pipefail"
+
+for h in $(target_commits | tail -r); do
+    comment="$(git log "$branch" --format="%H [%cn] %s (%cd)" | grep "${h}" | cut -d' ' -f 2-)"
+    echo "git cherry-pick -x ${h} # ${comment}"
+done
+

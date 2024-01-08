@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+
+choice_clusters() {
+    aws ecs list-clusters | jq -r .clusterArns[] | peco --layout bottom-up
+}
+
+choice_tasks() {
+    aws ecs list-tasks --cluster "$1" | jq -r .taskArns[] | peco --layout bottom-up
+}
+
+choice_containers() {
+    aws ecs describe-tasks --cluster "$1" --tasks "$2" | jq -r .tasks[].containers[].name | peco --layout bottom-up
+}
+
+
+cluster=$(choice_clusters)
+test -n "$cluster"
+
+task=$(choice_tasks "$cluster")
+test -n "$task"
+
+container=$(choice_containers "$cluster" "$task")
+test -n "$container"
+
+aws ecs execute-command \
+    --cluster "$cluster" \
+    --task "$task" \
+    --container "$container" \
+    --interactive \
+    --command "/bin/bash"
+

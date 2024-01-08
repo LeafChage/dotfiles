@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SSH_CONFIG=~/.ssh/config
+sshs() {
+    cat $SSH_CONFIG | grep -E "Host\s+.*" | cut -d' ' -f 2-
+}
+
+if [ "$1" == "info" ]; then
+    # .ssh/configを見て選択して接続することが出来ます
+    purpose=$(sshs | peco --layout bottom-up)
+    sshinfo "$purpose"
+else
+    # .ssh/configを見て選択して接続することが出来ます
+    purpose=$(sshs | peco --layout bottom-up)
+    echo "ssh => $purpose"
+    ssh $purpose
+fi

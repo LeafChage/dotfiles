@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+
+#####
+# docker psから絞り込んでexecまで繋ぐもの
+#####
+
+docker_image_name=$(docker ps | tail -n +2 | awk '{print $2}' | peco)
+test -n "$docker_image_name"
+
+docker_image_id=$(docker ps -q -f"NAME=$docker_image_name")
+test -n "$docker_image_id"
+
+docker exec -it $docker_image_id ${@}

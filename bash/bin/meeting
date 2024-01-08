@@ -1,0 +1,31 @@
+#!/usr/bin/env lua
+
+local luaLibraryPath = os.getenv("HOME") .. '/dotfiles/bash/bin/lib/?.lua'
+package.path = package.path .. ';' .. luaLibraryPath
+
+local cli = require("cli")
+
+local editor_binary = 'nvim'
+local meeting_memo_dir = '~/.memo'
+
+local function main(_, list)
+    local title = list[1] or nil
+
+    local now = os.date("*t")
+    local file_name = string.format("%d%d%d_%d%d%d", now.year, now.month, now.day, now.hour, now.min, now.sec)
+    if title ~= nil then
+        file_name = string.format("%s.%s.md", file_name, title)
+    else
+        file_name = string.format("%s.md", file_name)
+    end
+    local file_path = string.format("%s/%s", meeting_memo_dir, file_name)
+
+    os.execute(string.format("%s %s", editor_binary, file_path))
+    print(file_path)
+end
+
+cli.cmd("meeting")
+    :withDescription("write meeting log")
+    :withAction(main)
+    :withHelpCmd()
+    :run(arg)

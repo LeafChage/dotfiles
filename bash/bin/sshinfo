@@ -1,0 +1,70 @@
+#!/usr/bin/env lua
+
+local luaLibraryPath = os.getenv("HOME") .. '/dotfiles/bash/bin/lib/?.lua'
+package.path = package.path .. ';' .. luaLibraryPath
+
+local ssh_config_path = os.getenv("HOME") .. '/.ssh/config'
+
+local cli = require("cli")
+local p = require("parser")
+
+local example = [[
+$ sshinfo {host_name}
+> HostName 127.0.0.1
+> User ubuntu
+> IdentityFile ~/key/remotehost.pem
+> ServerAliveInterval 60
+> ServerAliveCountMax 5
+]]
+
+--- @param src string
+--- @return boolean, string
+local parse_host = function(src)
+    local ok, _, output = p.next(p.next(p.whitespaces(), p.string("Host")), p.whitespaces1())(src)
+    if not ok then
+        return false, ""
+    end
+
+    local ok_host_parse, _, skip_whitespace = p.skip(p.whitespaces())(output)
+    return ok_host_parse, skip_whitespace
+end
+
+local main = function(_, list)
+    local hostname = list[1]
+    if hostname == nil then
+        print("not found hostname")
+        os.exit(1)
+    end
+
+    local f = io.open(ssh_config_path, "r")
+    if f == nil then
+        print(string.format("%s is not found", ssh_config_path))
+        os.exit(1)
+        return
+    end
+
+    local has_found = false
+    for line in f:lines() do
+        if line == "" then
+            goto continue
+        end
+
+        local ok, hn = parse_host(line)
+        if ok then
+            has_found = hn == hostname
+        end
+        if has_found then
+            print(line)
+        end
+
+        ::continue::
+    end
+    f:close()
+end
+
+cli.cmd("sshinfo")
+    :withExample(example)
+    :withDescription("show ssh information in ssh/configfile")
+    :withAction(main)
+    :withHelpCmd()
+    :run(arg)

@@ -1,0 +1,32 @@
+[user]
+    name = LeafChage
+    email = t.kusanagi5512@gmail.com
+
+[alias]
+    l = log --graph --date=short --pretty='format:%C(yellow)%H %C(cyan)%ad %C(green)%an %Creset %s %C(red)%d% %Creset'
+    s = status
+    ch = checkout
+    c = commit -m
+    a = add
+    p = push
+    prune = fetch --prune
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[core]
+    excludesfile = ~/.gitignore
+
+[difftool]
+    prompt = false
+
+[diff]
+    tool = vimdiff
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+[push]
+    autoSetupRemote = true

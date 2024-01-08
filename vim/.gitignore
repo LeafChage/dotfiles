@@ -1,0 +1,10 @@
+nvim/nvim/dein/*
+!nvim/nvim/dein/dein.toml
+nvim/nvim/autoload
+
+vim/.vim/dein/*
+!vim/.vim/dein/dein.toml
+vim/.vim/autoload
+
+
+
