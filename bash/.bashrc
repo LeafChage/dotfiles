@@ -30,5 +30,3 @@ for setting_file in ${setting_files}; do
 done
 echo  "Finished!!!"
 
-# global github setting
-bash $DOTFILE_PATH/git/init.bash
