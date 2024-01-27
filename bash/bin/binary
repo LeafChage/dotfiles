@@ -1,0 +1,13 @@
+#!/bin/env ruby
+
+num = if ARGV.size > 0
+        ARGV[0]
+      else
+        print "num > "
+        STDIN.first.to_i
+      end
+
+puts "#{num}"
+puts "0b%b" % num
+puts "0x%x" % num
+
