@@ -17,11 +17,6 @@ local concat = function(...)
     return result
 end
 
----@param keymap string
----@param action string
-local nmap = function(keymap, action)
-    vim.keymap.set("n", keymap, action, { noremap = true, silent = true })
-end
 
 local lazy = load_extention("lazy")
 
@@ -84,8 +79,10 @@ local other = {
         'folke/zen-mode.nvim',
         config = function()
             load_extention("x-zen-mode")
-            nmap('<Leader>1', [[<CMD>ZenMode<CR>]])
-        end
+        end,
+        keys = {
+            { "<Leader>1", [[ <cmd>ZenMode<cr> ]], desc = "toggle zenmode" }
+        }
     },
 }
 
@@ -151,13 +148,18 @@ local core = {
         },
         config = function()
             load_extention('x-telescope')
-            nmap('<Leader>ff', [[<CMD>lua require('x-telescope-builtin').find_files()<CR>]])
-            nmap('<Leader>fb', [[<CMD>lua require('x-telescope-builtin').buffers()<CR>]])
-            nmap('<Leader>fg', [[<CMD>lua require('x-telescope-builtin').live_grep()<CR>]])
-            nmap('<Leader>fh', [[<CMD>lua require('x-telescope-builtin').help_tags()<CR>]])
-            nmap("<Leader>fn", [[<CMD>lua require('x-telescope-file-browser').file_browser()<CR>]])
-            nmap("<Leader>fp", [[<CMD>Telescope neoclip<CR>]])
-            nmap('<leader>fa', [[<CMD>Telescope aerial<CR>]])
+            vim.keymap.set("n", '<Leader>ff', [[<CMD>lua require('x-telescope-builtin').find_files()<CR>]],
+                { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>fb', [[<CMD>lua require('x-telescope-builtin').buffers()<CR>]],
+                { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>fg', [[<CMD>lua require('x-telescope-builtin').live_grep()<CR>]],
+                { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>fh', [[<CMD>lua require('x-telescope-builtin').help_tags()<CR>]],
+                { silent = true, noremap = true })
+            vim.keymap.set("n", "<Leader>fn", [[<CMD>lua require('x-telescope-file-browser').file_browser()<CR>]],
+                { silent = true, noremap = true })
+            vim.keymap.set("n", "<Leader>fp", [[<CMD>Telescope neoclip<CR>]], { silent = true, noremap = true })
+            vim.keymap.set("n", '<leader>fa', [[<CMD>Telescope aerial<CR>]], { silent = true, noremap = true })
         end
     },
     {
@@ -235,6 +237,44 @@ local copilot = {
     }
 }
 
+local dap = {
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            config = function()
+                local dapui = require("dapui")
+                dapui.setup()
+                vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "Toggle debugging UI" })
+                -- vim.keymap.set("n", "<Leader>dK", function()
+                --     dapui.eval(nil, { enter = true })
+                -- end, { desc = "Debug symbol under cursor" })
+            end,
+        },
+        config = function()
+            local dap = load_extention("x-dap")
+            vim.keymap.set("n", '<Leader>dr', function() require("dap").restart() end, { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>dt', function() require("dap").toggle_breakpoint() end,
+                { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>dc', function() require("dap").continue() end, { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>dss', function() require("dap").step_over() end,
+                { silent = true, noremap = true })
+            vim.keymap.set("n", '<Leader>dsi', function() require("dap").step_into() end,
+                { silent = true, noremap = true })
+        end
+    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+        },
+        config = function()
+            local mason = load_extention("x-mason-dap")
+        end
+    }
+}
+
 local lisp = {
     {
         "monkoose/nvlime",
@@ -250,4 +290,13 @@ local lisp = {
 }
 
 
-lazy.setup(concat(other, core, colorscheme, markdown, ruby, local_plugins, lisp), {})
+lazy.setup(concat(
+    other,
+    core,
+    colorscheme,
+    markdown,
+    ruby,
+    local_plugins,
+    lisp,
+    dap
+), {})
