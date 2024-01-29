@@ -243,8 +243,7 @@ local dap = {
         dependencies = {
             "rcarriga/nvim-dap-ui",
             config = function()
-                local dapui = require("dapui")
-                dapui.setup()
+                local dapui = load_extention("x-dap-ui")
                 vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "Toggle debugging UI" })
                 -- vim.keymap.set("n", "<Leader>dK", function()
                 --     dapui.eval(nil, { enter = true })
