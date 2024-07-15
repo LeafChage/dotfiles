@@ -9,7 +9,7 @@ config.setup {
         "lua",
         "typescript",
         "php",
-        "ruby",
+        -- "ruby",
         "fennel",
         "go",
         "c_sharp",

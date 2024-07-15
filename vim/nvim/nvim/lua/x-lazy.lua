@@ -288,6 +288,17 @@ local lisp = {
     }
 }
 
+local clj = {
+    {
+        "liquidz/vim-iced",
+        dependencies = { "guns/vim-sexp" },
+        ft = { "clojure" },
+        config = function()
+            local iced = load_extention("x-iced")
+        end
+    }
+}
+
 
 lazy.setup(concat(
     other,
@@ -297,5 +308,6 @@ lazy.setup(concat(
     ruby,
     local_plugins,
     lisp,
+    clj,
     dap
 ), {})
