@@ -1,5 +1,4 @@
-name: 'build docker'
-description: 'build docker image with this dotfiles'
+name: 'build docker image with this dotfiles'
 
 on:
   push:
