@@ -1,5 +1,7 @@
 FROM ubuntu:24.04
 
+SHELL ["/bin/bash", "-c"]
+
 RUN apt update && apt upgrade -y && \
         apt install -y curl gcc make git
 
