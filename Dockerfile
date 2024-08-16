@@ -20,4 +20,5 @@ RUN echo DOTFILE_EMOJI=1 >> ~/.bashrc && \
    echo export PATH=\$PATH:/opt/nvim-linux64/bin:/opt/peco_linux_amd64:/opt/fzf/bin >> ~/.bashrc && \
    echo source /dotfiles/bash/.bashrc >> ~/.bashrc
 
+RUN source ~/.bashrc
 RUN /opt/nvim-linux64/bin/nvim --headless +q
