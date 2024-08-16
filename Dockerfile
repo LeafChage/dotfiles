@@ -1,10 +1,10 @@
 FROM ubuntu:24.04
 
 RUN apt update && apt upgrade -y && \
-        apt install -y curl git gcc make
+        apt install -y curl gcc make git
 
 ## install dotfiles
-RUN git clone https://github.com/LeafChage/dotfiles.git /dotfiles
+ADD . /dotfiles
 WORKDIR /dotfiles
 
 RUN make all
