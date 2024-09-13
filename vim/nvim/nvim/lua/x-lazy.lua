@@ -299,6 +299,22 @@ local clj = {
     }
 }
 
+local obsidian = {
+    {
+        "epwalsh/obsidian.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", },
+        ft = { "markdown", "md" },
+        config = function()
+            local obsidian = load_extention("x-obsidian");
+        end,
+        keys = {
+            { "<Leader>of", [[<cmd>ObsidianTags<CR>]], desc = "search file by tags" },
+            { "<Leader>oF", [[<cmd>ObsidianQuickSwitch<CR>]], desc = "search file" }
+        }
+    }
+}
+
+
 
 lazy.setup(concat(
     other,
@@ -309,5 +325,6 @@ lazy.setup(concat(
     local_plugins,
     lisp,
     clj,
-    dap
+    dap,
+    obsidian
 ), {})
