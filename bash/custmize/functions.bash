@@ -41,4 +41,5 @@ for fn in ${functions}; do
     test -e "$fn" && source "$fn"
 done
 
-
+# obsidian
+alias obs="vim \"+set ft=markdown\" \"+ObsidianTags\""
