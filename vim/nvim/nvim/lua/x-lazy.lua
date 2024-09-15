@@ -308,8 +308,10 @@ local obsidian = {
             local obsidian = load_extention("x-obsidian");
         end,
         keys = {
-            { "<Leader>of", [[<cmd>ObsidianTags<CR>]], desc = "search file by tags" },
-            { "<Leader>oF", [[<cmd>ObsidianQuickSwitch<CR>]], desc = "search file" }
+            { "<Leader>ot", [[<cmd>ObsidianTags<CR>]],        desc = "search file by tags" },
+            { "<Leader>of", [[<cmd>ObsidianQuickSwitch<CR>]], desc = "search file" },
+            { "<Leader>on", [[<cmd>ObsidianRename<CR>]],      desc = "rename this file" },
+            { "<Leader>od", [[<cmd>ObsidianUnlink<CR>]],      desc = "remove this file" },
         }
     }
 }
