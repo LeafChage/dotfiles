@@ -38,7 +38,7 @@ if has("autocmd")
     au FileType pug            setlocal sw=2 sts=2 ts=2 et
     au FileType ejs            setlocal sw=2 sts=2 ts=2 et
     au FileType ruby           setlocal sw=2 sts=2 ts=2 et
-    au FileType markdown       setlocal sw=2 sts=2 ts=2 et conceallevel=1
+    au FileType markdown       setlocal sw=2 sts=2 ts=2 et conceallevel=1 spell spelllang=en_us
     au FileType yaml           setlocal sw=2 sts=2 ts=2 et
     au FileType javascript     setlocal sw=2 sts=2 ts=2 et
     au FileType typescript     setlocal sw=2 sts=2 ts=2 et
