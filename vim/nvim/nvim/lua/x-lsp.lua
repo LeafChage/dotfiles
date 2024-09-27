@@ -99,9 +99,7 @@ mason_lspconfig.setup_handlers({
         nvim_lspconfig[server_name].setup(common_setting)
     end,
     ["typos_lsp"] = function()
-        nvim_lspconfig["typos_lsp"].setup(
-            vim.tbl_extend('force', common_setting, require("x-lsp/typos_lsp"))
-        )
+        nvim_lspconfig["typos_lsp"].setup(require("x-lsp/typos_lsp"))
     end,
     ["lua_ls"] = function()
         nvim_lspconfig["lua_ls"].setup(

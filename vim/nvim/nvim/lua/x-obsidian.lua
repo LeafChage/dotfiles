@@ -4,6 +4,7 @@ if not ok then return end
 local log = require("obsidian.log")
 local util = require("obsidian.util")
 local Path = require("obsidian.path")
+local setting = require("setting")
 
 local unlink = function()
     local current_note_bufnr = assert(vim.fn.bufnr())
@@ -28,12 +29,18 @@ obsidian.setup({
     workspaces = {
         {
             name = "personal",
-            path = [[~/Documents/Obsidian Vault/]],
+            path = setting.obsidian.workspace_path,
         },
     },
     ui = {
         enable = true,
     },
+
+    --- @param url string
+    follow_url_func = function(url)
+        -- TODO: check linux or not
+        vim.fn.jobstart({ "xdg-open", url })
+    end,
     note_id_func = function(title)
         -- like '1657296016-my-new-note'
         local suffix = ""
