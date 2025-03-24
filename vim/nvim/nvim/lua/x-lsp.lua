@@ -90,6 +90,7 @@ local common_setting = {
 
 -- not mason
 nvim_lspconfig["zls"].setup(common_setting)
+-- nvim_lspconfig["sourcekit"].setup(common_setting)
 -- nvim_lspconfig["cl_lsp"].setup(common_setting)
 -- nvim_lspconfig["racket_language_server"].setup(common_setting)
 

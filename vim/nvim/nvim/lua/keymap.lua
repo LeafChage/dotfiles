@@ -39,3 +39,5 @@ vim.keymap.set('v', "<Leader>P", [["+P]], opt)
 vim.keymap.set('n', "<Leader>y", [["+y]], opt)
 vim.keymap.set('n', "<Leader>p", [["+p]], opt)
 vim.keymap.set('n', "<Leader>P", [["+P]], opt)
+
+vim.keymap.set('i', "¥", [[\]], opt)

@@ -11,7 +11,8 @@ local checkExistSqlite = function()
     ---@type string
     local result = handle:read('*a')
     handle:close();
-    return result:match(DBCMD) ~= nil
+    -- return result:match(DBCMD) ~= nil
+    return false
 end
 
 ---@return boolean

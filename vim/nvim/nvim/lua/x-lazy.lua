@@ -239,6 +239,7 @@ local copilot = {
 
 local dap = {
     {
+        "nvim-neotest/nvim-nio",
         "mfussenegger/nvim-dap",
         dependencies = {
             "rcarriga/nvim-dap-ui",
@@ -319,14 +320,14 @@ local obsidian = {
 
 
 lazy.setup(concat(
-    other,
-    core,
-    colorscheme,
-    markdown,
-    ruby,
-    local_plugins,
-    lisp,
-    clj,
-    dap,
-    obsidian
+    other
+    , core
+    , colorscheme
+    , markdown
+    , ruby
+    , local_plugins
+    , lisp
+    , clj
+    , dap
+    -- ,obsidian
 ), {})

@@ -79,6 +79,50 @@ local setup = function()
         },
         implementation = "custom"
     }
+
+    vim.g.nvlime_mappings = {
+        global = {
+            normal = {
+                keymaps_help = "<Leader>?",
+            }
+        },
+        lisp = {
+            normal = {
+                connection = {
+                    new = "<Leader>cc",
+                    switch = "<Leader>cs",
+                    rename = "<Leader>cR",
+                    close = "<Leader>cd"
+                },
+                server = {
+                    new = "<Leader>rr",
+                    show = "<Leader>rv",
+                    show_selected = "<Leader>rV",
+                    stop = "<Leader>rs",
+                    stop_selected = "<Leader>rS",
+                    rename = "<Leader>rR",
+                    restart = "<Leader>rt"
+                },
+                macro = {
+                    expand = "<Leader>mm",
+                    expand_once = "<Leader>mo",
+                    expand_all = "<Leader>ma"
+                },
+                compile = {
+                    expr = "<Leader>ce",
+                    toplevel_expr = "<Leader>ct",
+                    file = "<Leader>cf"
+                },
+                describe = {
+                    operator = "<Leader>k",
+                    atom = "<Leader>k",
+                },
+                repl = {
+                    prompt = "<Leader>si",
+                }
+            }
+        },
+    }
     local fn = exec_cmd("custom", extends_sbcl())
     vim.api.nvim_exec(fn, false)
 end
