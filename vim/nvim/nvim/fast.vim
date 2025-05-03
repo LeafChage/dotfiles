@@ -1,8 +1,5 @@
 let mapleader = "\<Space>"
 
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-
 fun! s:DetectLanguage()
     if getline(1) =~ "^#!.*/bin/env gosh"          | set ft=scheme     | endif
     if getline(1) =~ "^#!.*/bin/env ruby"          | set ft=ruby       | endif
