@@ -40,3 +40,6 @@ require("keymap")
 -- vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'keymap.vim')))
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'color.vim')))
 require("command")
+
+vim.g.python_host_prog = os.getenv("NEOVIM_PYTHON_PATH") or '/usr/bin/python'
+vim.g.python_host_prog = os.getenv("NEOVIM_PYTHON3_PATH") or '/opt/homebrew/bin/python3'
