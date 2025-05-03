@@ -9,8 +9,8 @@ all: nvim peco fzf rg jq
 
 nvim:
 	cd /tmp
-	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-	tar -C /opt -xzf nvim-linux64.tar.gz
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+	tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 	@echo "======================"
 	@echo "You need to path to /opt/nvim-linux64/bin"
 	@echo "======================"
