@@ -295,9 +295,23 @@ local clj = {
         "liquidz/vim-iced",
         dependencies = { "guns/vim-sexp" },
         ft = { "clojure" },
+        init = function()
+            vim.g.iced_enable_default_key_mappings = false
+        end,
         config = function()
-            local iced = load_extention("x-iced")
-        end
+            local _ = load_extention("x-iced")
+        end,
+        keys = {
+            { "<Leader>rr", [[<Plug>(iced_connect)]],                        mode = "n" },
+            { "<Leader>rj", [[<Plug>(iced_jack_in)]],                        mode = "n" },
+            { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
+            { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
+            { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
+            { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
+            { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
+            { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
+            { '<Leader>f',  [[<Plug>(iced_format_all)]],                     mode = "n" },
+        }
     },
     {
         "lamp/cmp-iced",
@@ -305,23 +319,9 @@ local clj = {
             'hrsh7th/nvim-cmp',
         },
         ft = { "clojure" },
-        init = function()
-            vim.g.iced_enable_default_key_mappings = false
-        end,
         config = function()
-            require("cmp").config.sources({ name = 'iced' })
+            local _ = load_extention("x-iced-cmp")
         end,
-        keys ={
-            { "<Leader>rr", [[<Plug>(iced_connect)]],                        mode = "n" },
-            { "<Leader>rj", [[<Plug>(iced_jack_in)]],                        mode = "n" },
-            { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
-            { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
-            { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
-            { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
-            { '<Leader>K',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
-            { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
-            { '=G',         [[<Plug>(iced_format_all)]],                     mode = "n" },
-        }
     }
 }
 
@@ -354,5 +354,5 @@ lazy.setup(concat(
     , lisp
     , clj
     , dap
-    -- ,obsidian
+-- ,obsidian
 ), {})
