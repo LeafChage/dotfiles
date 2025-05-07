@@ -54,6 +54,7 @@ local exec_cmd = function(cmd_name, with_load)
             function! %s(nvlime_loader, nvlime_eval)
                 return [
                     \ "sbcl",
+                    \ "--dynamic-space-size", "4096",
                     \ %s,
                     \ "--load", a:nvlime_loader,
                     \ "--eval", a:nvlime_eval
