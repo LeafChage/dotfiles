@@ -6,4 +6,5 @@ if path:find("iced") == nil then
     vim.notify("PATH: " .. lazypath, vim.log.levels.WARN)
 end
 
-
+-- if you want to connect shadow-clj check help page!
+-- :help vim-iced-manual-shadow-cljs

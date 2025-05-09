@@ -110,17 +110,25 @@ local core = {
             'williamboman/mason-lspconfig.nvim',
             'glepnir/lspsaga.nvim'
         },
-        build = ":MasonUpdate",
         config = function()
             -- lspの設定は全部ここで行う
             load_extention('x-lsp')
         end,
     },
     {
+        'williamboman/mason.nvim',
+        config = function()
+            load_extention('x-mason')
+        end
+    },
+    {
         'williamboman/mason-lspconfig.nvim',
         dependencies = {
-            'williamboman/mason.nvim'
-        }
+            'williamboman/mason.nvim',
+        },
+        config = function()
+            load_extention('x-mason-lspconfig')
+        end
     },
     {
         'glepnir/lspsaga.nvim',
@@ -307,8 +315,11 @@ local clj = {
             { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
             { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
             { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
+            { '<Leader>so', [[<Plug>(iced_stdout_buffer_toggle)]],           mode = "n" },
             { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
             { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
+            { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
+            { '<Leader>K',  [[<Plug>(iced_document_open)]],                  mode = "n" },
             { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
             { '<Leader>f',  [[<Plug>(iced_format_all)]],                     mode = "n" },
         }
@@ -322,7 +333,25 @@ local clj = {
         config = function()
             local _ = load_extention("x-iced-cmp")
         end,
-    }
+    },
+    -- {
+    --     "liquidz/vim-iced-multi-session",
+    --     ft = { "clojure" },
+    --     init = function()
+    --         vim.g["iced_multi_session#definitions"] = {
+    --             {
+    --                 port_file = printf('%s/.nrepl-port', expand('<sfile>:p:h')),
+    --                 path = 'src/',
+    --                 name = 'web'
+    --             },
+    --             {
+    --                 port_file = printf('%s/nrepl-shadow-cljs.port', expand('<sfile>:p:h')),
+    --                 path = 'src/',
+    --                 name = 'shadow-cljs'
+    --             },
+    --         }
+    --     end
+    -- }
 }
 
 local obsidian = {

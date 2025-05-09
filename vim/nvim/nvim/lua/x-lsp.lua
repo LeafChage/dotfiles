@@ -1,35 +1,8 @@
---- libraary import
-local ok, mason = pcall(require, "mason")
-local ok1, mason_lspconfig = pcall(require, "mason-lspconfig")
-local ok2, nvim_lspconfig = pcall(require, "x-lspconfig")
-local ok3, lspsaga = pcall(require, "lspsaga")
+local ok, lspsaga = pcall(require, "lspsaga")
 if not ok then
-    print("not found mason.")
-    return
-end
-
-if not ok1 then
-    print("not found mason-lspconfig.")
-    return
-end
-if not ok2 then
-    print("not found lspconfig.")
-    return
-end
-if not ok3 then
     print("not found lspsaga.")
     return
 end
-
-mason.setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
-})
 
 ---
 --- lspsaga setting
@@ -60,20 +33,69 @@ lspsaga.setup({
     },
 })
 
---- lsp settings
-local common_setting = {
-    on_attach = function(client, bufnr)
+---@param name string
+---@return function
+local not_supported_action = function(name)
+    return function()
+        vim.notify("Not supported: " .. name, vim.log.levels.WARN)
+    end
+end
+
+--- @ref https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+-- - `'callHierarchy/incomingCalls'`
+-- - `'callHierarchy/outgoingCalls'`
+-- - `'textDocument/codeAction'`
+-- - `'textDocument/completion'`
+-- - `'textDocument/declaration'`
+-- - `'textDocument/definition'`
+-- - `'textDocument/diagnostic'`
+-- - `'textDocument/documentHighlight'`
+-- - `'textDocument/documentSymbol'`
+-- - `'textDocument/foldingRange'`
+-- - `'textDocument/formatting'`
+-- - `'textDocument/hover'`
+-- - `'textDocument/implementation'`
+-- - `'textDocument/inlayHint'`
+-- - `'textDocument/prepareTypeHierarchy'`
+-- - `'textDocument/publishDiagnostics'`
+-- - `'textDocument/rangeFormatting'`
+-- - `'textDocument/rangesFormatting'`
+-- - `'textDocument/references'`
+-- - `'textDocument/rename'`
+-- - `'textDocument/semanticTokens/full'`
+-- - `'textDocument/semanticTokens/full/delta'`
+-- - `'textDocument/signatureHelp'`
+-- - `'textDocument/typeDefinition*'`
+-- - `'typeHierarchy/subtypes'`
+-- - `'typeHierarchy/supertypes'`
+-- - `'window/logMessage'`
+-- - `'window/showMessage'`
+-- - `'window/showDocument'`
+-- - `'window/showMessageRequest'`
+-- - `'workspace/applyEdit'`
+-- - `'workspace/configuration'`
+-- - `'workspace/executeCommand'`
+-- - `'workspace/inlayHint/refresh'`
+-- - `'workspace/symbol'`
+-- - `'workspace/workspaceFolders'`
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
         print("Attaching LSP: " .. client.name)
-        local bufopts = { silent = true, buffer = bufnr }
-        -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        local bufopts = { silent = true, buffer = args.buf }
 
         -- keybind
-        vim.keymap.set('n', '<Leader>jj', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
-        vim.keymap.set('n', '<Leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
-        vim.keymap.set('n', '<Leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
-        vim.keymap.set('n', '<Leader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', bufopts)
-
-        -- keymap for lapsaga
+        vim.keymap.set('n', '<Leader>jj', vim.lsp.buf.definition, bufopts)
+        vim.keymap.set('n', '<Leader>jt', vim.lsp.buf.type_definition, bufopts)
+        if client:supports_method('textDocument/rename') then
+            vim.keymap.set('n', '<Leader>n', vim.lsp.buf.rename, bufopts)
+        else
+            vim.keymap.set('n', '<Leader>n', not_supported_action('textDocument/rename'), bufopts)
+        end
+        vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, bufopts)
+        --
+        -- -- keymap for lapsaga
         vim.keymap.set('n', '<Leader>k', '<cmd>Lspsaga hover_doc<CR>', bufopts)
         vim.keymap.set('n', '<Leader>jk', '<Cmd>Lspsaga peek_definition<CR>', bufopts)
         vim.keymap.set('n', '<Leader>r', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
@@ -85,36 +107,5 @@ local common_setting = {
 
         vim.keymap.set('n', '<Leader>[', "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
         vim.keymap.set('n', '<Leader>]', "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-    end
-}
-
--- not mason
-nvim_lspconfig["zls"].setup(common_setting)
--- nvim_lspconfig["sourcekit"].setup(common_setting)
--- nvim_lspconfig["cl_lsp"].setup(common_setting)
--- nvim_lspconfig["racket_language_server"].setup(common_setting)
-
---- @ref https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-mason_lspconfig.setup_handlers({
-    function(server_name)
-        nvim_lspconfig[server_name].setup(common_setting)
-    end,
-    ["typos_lsp"] = function()
-        nvim_lspconfig["typos_lsp"].setup(require("x-lsp/typos_lsp"))
-    end,
-    ["lua_ls"] = function()
-        nvim_lspconfig["lua_ls"].setup(
-            vim.tbl_extend('force', common_setting, require("x-lsp/lua_ls"))
-        )
-    end,
-    ["solargraph"] = function()
-        nvim_lspconfig["solargraph"].setup(
-            vim.tbl_extend('force', common_setting, require("x-lsp/solargraph"))
-        )
-    end,
-    ["pyright"] = function()
-        nvim_lspconfig["pyright"].setup(
-            vim.tbl_extend('force', common_setting, require("x-lsp/pyright"))
-        )
     end,
 })
