@@ -204,6 +204,13 @@ local colorscheme = {
 
 local markdown = {
     {
+        -- cmp source of 'look', which completion for English word,
+        'octaltree/cmp-look',
+        config = function()
+            load_extention("x-cmp-look")
+        end
+    },
+    {
         -- quote内のプログラムをシンタックスハイライトする
         'joker1007/vim-markdown-quote-syntax',
         ft = { "markdown", "md" }
@@ -305,6 +312,7 @@ local clj = {
         ft = { "clojure" },
         init = function()
             vim.g.iced_enable_default_key_mappings = false
+            vim.g["iced#cljs#default_env"] = "figwheel-main"
         end,
         config = function()
             local _ = load_extention("x-iced")
@@ -334,24 +342,6 @@ local clj = {
             local _ = load_extention("x-iced-cmp")
         end,
     },
-    -- {
-    --     "liquidz/vim-iced-multi-session",
-    --     ft = { "clojure" },
-    --     init = function()
-    --         vim.g["iced_multi_session#definitions"] = {
-    --             {
-    --                 port_file = printf('%s/.nrepl-port', expand('<sfile>:p:h')),
-    --                 path = 'src/',
-    --                 name = 'web'
-    --             },
-    --             {
-    --                 port_file = printf('%s/nrepl-shadow-cljs.port', expand('<sfile>:p:h')),
-    --                 path = 'src/',
-    --                 name = 'shadow-cljs'
-    --             },
-    --         }
-    --     end
-    -- }
 }
 
 local obsidian = {
@@ -383,5 +373,5 @@ lazy.setup(concat(
     , lisp
     , clj
     , dap
--- ,obsidian
+    , obsidian
 ), {})
