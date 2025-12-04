@@ -109,3 +109,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<Leader>]', "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
     end,
 })
+
+vim.lsp.config('clangd', {
+    cmd = {
+        "clangd",
+        "--offset-encoding=utf-16", -- LSPのoffsetエンコーディングを明示
+        "--pch-storage=memory",     -- PCHをメモリに保持（スピードアップ＆同期安定）
+    },
+    flags = {
+        allow_incremental_sync = false, -- 差分同期を無効化
+    },
+})
+
+vim.lsp.config('docker_language_server', {
+    settings = {
+        initializationOptions = {
+            dockercomposeExperimental = {
+                composeSupport = true
+            },
+            telemetry = "error"
+        }
+    },
+})
+
+vim.lsp.enable('sourcekit')

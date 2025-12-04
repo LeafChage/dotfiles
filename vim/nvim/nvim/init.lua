@@ -37,7 +37,6 @@ vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, "fast.vim")))
 require("x-lazy")
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'common.vim')))
 require("keymap")
--- vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'keymap.vim')))
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'color.vim')))
 require("command")
 

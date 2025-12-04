@@ -14,21 +14,22 @@ if has("autocmd")
     filetype plugin on
     filetype indent on
 
-    au BufRead,BufNewFile *.ejs    setfiletype ejs
-    au BufRead,BufNewFile *._ejs   setfiletype ejs
-    au BufRead,BufNewFile *.pug    setfiletype pug
-    au BufRead,BufNewFile *.fs     setfiletype fsharp
-    au BufRead,BufNewFile *.fsx    setfiletype fsharp
-    au BufRead,BufNewFile *.fsproj setfiletype xml
-    au BufRead,BufNewFile *.es6    setfiletype javascript
-    au BufRead,BufNewFile *.ros    setfiletype lisp
-    au BufRead,BufNewFile *.asd    setfiletype lisp
-    au BufRead,BufNewFile *.phtml  setfiletype html
-    au BufRead,BufNewFile *.conf   setfiletype conf
-    au BufRead,BufNewFile *.ts     setfiletype typescript
-    au BufRead,BufNewFile *.tsx    let         b:tsx_ext_found =1
-    au BufRead,BufNewFile *.tsx    setfiletype typescript.tsx
-    au BufRead,BufNewFile *        call        s:DetectLanguage()
+    au BufRead,BufNewFile *.ejs                                    setfiletype ejs
+    au BufRead,BufNewFile *._ejs                                   setfiletype ejs
+    au BufRead,BufNewFile *.pug                                    setfiletype pug
+    au BufRead,BufNewFile *.fs                                     setfiletype fsharp
+    au BufRead,BufNewFile *.fsx                                    setfiletype fsharp
+    au BufRead,BufNewFile *.fsproj                                 setfiletype xml
+    au BufRead,BufNewFile *.es6                                    setfiletype javascript
+    au BufRead,BufNewFile *.ros                                    setfiletype lisp
+    au BufRead,BufNewFile *.asd                                    setfiletype lisp
+    au BufRead,BufNewFile *.phtml                                  setfiletype html
+    au BufRead,BufNewFile *.conf                                   setfiletype conf
+    au BufRead,BufNewFile *.ts                                     setfiletype typescript
+    au BufRead,BufNewFile *.tsx                                    let         b:tsx_ext_found =1
+    au BufRead,BufNewFile *.tsx                                    setfiletype typescript.tsx
+    au BufRead,BufNewFile docker-compose*.yaml,docker-compose*.yml set         ft=yaml.docker-compose
+    au BufRead,BufNewFile *                                        call        s:DetectLanguage()
 
     au FileType c              setlocal sw=2 sts=2 ts=2 et
     au FileType html           setlocal sw=2 sts=2 ts=2 et
