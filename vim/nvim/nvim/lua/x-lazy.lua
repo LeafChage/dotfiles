@@ -350,7 +350,7 @@ local obsidian = {
         dependencies = { "nvim-lua/plenary.nvim", },
         ft = { "markdown", "md" },
         config = function()
-            local obsidian = load_extention("x-obsidian");
+            local _ = load_extention("x-obsidian");
         end,
         keys = {
             { "<Leader>ot", [[<cmd>ObsidianTags<CR>]],        desc = "search file by tags" },
@@ -360,6 +360,30 @@ local obsidian = {
         }
     }
 }
+
+local ai = {
+    {
+        "olimorris/codecompanion.nvim",
+        version = "^18.0.0",
+        opts = {},
+        config = function()
+            local _ = load_extention("x-codecompanion");
+            vim.keymap.set("n", '<Leader>fc', function()
+                require("codecompanion").toggle({
+                    window_opts = {
+                        layout = "float",
+                        width = 0.6
+                    }
+                })
+            end, { silent = true, noremap = true })
+        end,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    },
+}
+
 
 
 
@@ -373,5 +397,6 @@ lazy.setup(concat(
     , lisp
     , clj
     , dap
-    , obsidian
+    -- , obsidian
+    , ai
 ), {})
