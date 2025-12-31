@@ -368,14 +368,6 @@ local ai = {
         opts = {},
         config = function()
             local _ = load_extention("x-codecompanion");
-            vim.keymap.set("n", '<Leader>fc', function()
-                require("codecompanion").toggle({
-                    window_opts = {
-                        layout = "float",
-                        width = 0.6
-                    }
-                })
-            end, { silent = true, noremap = true })
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",

@@ -1,9 +1,23 @@
 local companion = require("codecompanion")
 
+
 return companion.setup({
     adapters = {
         http = {
             anthropic = function()
+                local apikey = vim.fn.system({
+                    "op",
+                    "item",
+                    "get",
+                    "claude",
+                    "--vault",
+                    "Personal-Develop",
+                    "--field",
+                    "notesPlain",
+                })
+                -- cached variable in closure
+                local anthropicAPIKey = vim.trim(apikey)
+
                 return require("codecompanion.adapters").extend("anthropic", {
                     schema = {
                         model = {
@@ -11,19 +25,7 @@ return companion.setup({
                         },
                     },
                     env = {
-                        api_key = function()
-                            local apikey = vim.fn.system({
-                                "op",
-                                "item",
-                                "get",
-                                "claude",
-                                "--vault",
-                                "Personal-Develop",
-                                "--field",
-                                "notesPlain",
-                            })
-                            return vim.trim(apikey)
-                        end
+                        api_key = anthropicAPIKey
                     },
                 })
             end,
