@@ -5,6 +5,7 @@ rg
 peco
 jq
 fzf
+op
 "
 
 check_installed() {
