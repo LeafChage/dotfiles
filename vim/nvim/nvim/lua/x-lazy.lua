@@ -298,6 +298,7 @@ local lisp = {
             'monkoose/parsley',
             'hrsh7th/nvim-cmp',
         },
+        ft = { "lisp" },
         config = function()
             local nvlime = load_extention("x-nvlime")
             nvlime.setup()
