@@ -26,12 +26,6 @@ local other = {
     'Shougo/vimshell',
     "tpope/vim-fugitive",
     {
-        "numToStr/Comment.nvim",
-        config = function()
-            load_extention("x-comment")
-        end
-    },
-    {
         -- カーソル下のハイライトをトグルする space+mで検索
         't9md/vim-quickhl',
         config = function()
@@ -139,6 +133,7 @@ local core = {
     },
     {
         "nvim-treesitter/nvim-treesitter",
+        breanch = "main",
         config = function()
             load_extention('x-treesitter')
         end

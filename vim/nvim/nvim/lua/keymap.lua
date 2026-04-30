@@ -40,4 +40,8 @@ vim.keymap.set('n', "<Leader>y", [["+y]], opt)
 vim.keymap.set('n', "<Leader>p", [["+p]], opt)
 vim.keymap.set('n', "<Leader>P", [["+P]], opt)
 
+
 vim.keymap.set('i', "¥", [[\]], opt)
+
+vim.keymap.set('n', '<C-z>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-z>', 'gc', { remap = true })
