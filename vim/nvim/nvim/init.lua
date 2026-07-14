@@ -7,28 +7,38 @@ local path = require("x/path")
 --- @param dotfile_config string
 --- @return string | nil
 local setting_dir = function(nvim_config, dotfile_config)
-    if nvim_config ~= "" then
+    if nvim_config ~= nil and nvim_config ~= "" then
         return nvim_config
-    elseif dotfile_config ~= "" then
+    elseif dotfile_config ~= nil and dotfile_config ~= "" then
         return path.join(dotfile_config, "vim/nvim/nvim")
     end
     error("ERROR: you need setting environment. export DOTFILE_PATH=~~~~~~~~;")
+    vim.fn.getchar()
+    os.exit(1)
 end
-
-
 
 local vim_setting_dir = setting_dir(vim.env.NVIM_CONFIG_DIR, vim.env.DOTFILE_PATH)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.loop.fs_stat(lazypath) then
-    print(vim.fn.system({
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
         "--branch=stable",
+        lazyrepo,
         lazypath,
-    }))
+    })
+
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(vim.fn.expand(vim_setting_dir))
 vim.opt.rtp:prepend(lazypath)

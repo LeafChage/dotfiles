@@ -18,9 +18,13 @@ make nvim
 ```
 
 ### 4. symlink to init.lua
-You may need to set XDG_CONFIG_HOME
-
+You may need to set DOTFILE_PATH, set the directory of this project.
+like this `export DOTFILE_PATH=~/dotfiles`
 ```bash
-$ # export XDG_CONFIG_HOME=~/.config
 $ ln -s ~/dotfiles/vim/nvim/nvim ~/.config/
+```
+
+#### For Windows
+```powershell
+$ New-Item -ItemType SymbolicLink -Path "C:\Users\tkusa\AppData\Local\nvim" -Value "C:\Users\tkusa\dotfiles\vim\nvim\nvim"
 ```
