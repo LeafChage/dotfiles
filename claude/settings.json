@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(rm -r -f *)",
+      "Bash(git clean *)",
+      "Bash(git reset --hard*)",
+      "PowerShell(Remove-Item -Recurse -Force*)",
+      "PowerShell(Remove-Item -Force -Recurse*)",
+      "PowerShell(rm -Recurse -Force*)",
+      "PowerShell(ri -Recurse -Force*)"
+    ],
+    "ask": [
+      "Bash",
+      "PowerShell",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}
