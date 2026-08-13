@@ -87,3 +87,6 @@ mcp-needs-auth-cache.json
 /.last-update-result.json
 /daemon.status.json
 /agent-memory
+/telemetry
+daemon-auth-cooldown
+daemon-auth-status.json
