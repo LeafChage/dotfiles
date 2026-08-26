@@ -132,15 +132,7 @@ vim.lsp.config('docker_language_server', {
     },
 })
 
-vim.lsp.config('sourcekit', {
-    filetypes = { "swift" },
-    capabilities = {
-        workspace = {
-            didChangeWatchedFiles = {
-                dynamicRegistration = true,
-            },
-        },
-    },
-})
-
-vim.lsp.enable('sourcekit')
+vim.lsp.config('pyright', { filetypes = { 'python' }, })
+vim.lsp.config('ruff', { filetypes = { 'python' }, })
+vim.lsp.config('sourcekit', { filetypes = { 'swift' } })
+vim.lsp.enable({ 'pyright', 'sourcekit', 'ruff' })

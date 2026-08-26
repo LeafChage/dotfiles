@@ -20,5 +20,10 @@
       "Bash",
       "PowerShell"
     ]
-  }
+  },
+  "worktree": {
+    "bgIsolation": "none"
+  },
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true
 }

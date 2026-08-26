@@ -33,7 +33,7 @@ if not vim.loop.fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
+            { out,                            "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -44,6 +44,7 @@ vim.opt.rtp:prepend(vim.fn.expand(vim_setting_dir))
 vim.opt.rtp:prepend(lazypath)
 
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, "fast.vim")))
+require("x-fast")
 require("x-lazy")
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'common.vim')))
 require("keymap")

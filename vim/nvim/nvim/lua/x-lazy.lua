@@ -303,41 +303,82 @@ local lisp = {
 
 local clj = {
     {
-        "liquidz/vim-iced",
-        dependencies = { "guns/vim-sexp" },
-        ft = { "clojure" },
+        "olical/conjure",
+        ft = { "clojure", "edn" },
         init = function()
-            vim.g.iced_enable_default_key_mappings = false
-            vim.g["iced#cljs#default_env"] = "figwheel-main"
+            vim.g["conjure#filtypes"]                  = { "clojure" }
+
+            vim.g["conjure#mapping#enable_defaults"]   = false
+            vim.g["conjure#mapping#prefix"]            = "<Leader>"
+            -- logs
+            -- vim.g["conjure#mapping#log_split"]                 = "ls"
+            -- vim.g["conjure#mapping#log_vsplit"]                = "lv"
+            -- vim.g["conjure#mapping#log_tab"]                   = "lt"
+            -- vim.g["conjure#mapping#log_buf"]                   = "le"
+            -- vim.g["conjure#mapping#log_toggle"]                = "lg"
+            -- vim.g["conjure#mapping#log_close_visible"]         = "lq"
+            -- vim.g["conjure#mapping#log_reset_soft"]            = "lr"
+            -- vim.g["conjure#mapping#log_reset_hard"]            = "lR"
+            -- vim.g["conjure#mapping#log_jump_to_latest"]        = "ll"
+
+            -- eval
+            vim.g["conjure#mapping#eval_current_form"] = "ee"
+            -- vim.g["conjure#mapping#eval_comment_current_form"] = "ece"
+            -- vim.g["conjure#mapping#eval_root_form"]            = "er"
+            -- vim.g["conjure#mapping#eval_comment_root_form"]    = "ecr"
+            -- vim.g["conjure#mapping#eval_word"]                 = "ew"
+            -- vim.g["conjure#mapping#eval_comment_word"]         = "ecw"
+            --
+            -- vim.g["conjure#mapping#eval_replace_form"]         = "e!"
+            -- vim.g["conjure#mapping#eval_marked_form"]          = "em"
+            -- vim.g["conjure#mapping#eval_file"]                 = "ef"
+            -- vim.g["conjure#mapping#eval_buf"]                  = "eb"
+            -- vim.g["conjure#mapping#eval_visual"]               = "E"
+            -- vim.g["conjure#mapping#eval_motion"]               = "E"
+            -- vim.g["conjure#mapping#eval_previous"]             = "ep"
+
+            -- vim.g["conjure#mapping#def_word"] = "jj" -- implemented by lsp
+            -- vim.g["conjure#mapping#doc_word"] = { "K" } -- implemented by lsp
         end,
         config = function()
-            local _ = load_extention("x-iced")
-        end,
-        keys = {
-            { "<Leader>rr", [[<Plug>(iced_connect)]],                        mode = "n" },
-            { "<Leader>rj", [[<Plug>(iced_jack_in)]],                        mode = "n" },
-            { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
-            { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
-            { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
-            { '<Leader>so', [[<Plug>(iced_stdout_buffer_toggle)]],           mode = "n" },
-            { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
-            { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
-            { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
-            { '<Leader>K',  [[<Plug>(iced_document_open)]],                  mode = "n" },
-            { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
-            { '<Leader>f',  [[<Plug>(iced_format_all)]],                     mode = "n" },
-        }
-    },
-    {
-        "lamp/cmp-iced",
-        dependencies = {
-            'hrsh7th/nvim-cmp',
-        },
-        ft = { "clojure" },
-        config = function()
-            local _ = load_extention("x-iced-cmp")
         end,
     },
+    -- {
+    --     "liquidz/vim-iced",
+    --     dependencies = { "guns/vim-sexp" },
+    --     ft = { "clojure" },
+    --     init = function()
+    --         vim.g.iced_enable_default_key_mappings = false
+    --         vim.g["iced#cljs#default_env"] = "figwheel-main"
+    --     end,
+    --     config = function()
+    --         local _ = load_extention("x-iced")
+    --     end,
+    --     keys = {
+    --         { "<Leader>rr", [[<Plug>(iced_connect)]],                        mode = "n" },
+    --         { "<Leader>rj", [[<Plug>(iced_jack_in)]],                        mode = "n" },
+    --         { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
+    --         { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
+    --         { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
+    --         { '<Leader>so', [[<Plug>(iced_stdout_buffer_toggle)]],           mode = "n" },
+    --         { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
+    --         { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
+    --         { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
+    --         { '<Leader>K',  [[<Plug>(iced_document_open)]],                  mode = "n" },
+    --         { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
+    --         { '<Leader>f',  [[<Plug>(iced_format_all)]],                     mode = "n" },
+    --     }
+    -- },
+    -- {
+    --     "lamp/cmp-iced",
+    --     dependencies = {
+    --         'hrsh7th/nvim-cmp',
+    --     },
+    --     ft = { "clojure" },
+    --     config = function()
+    --         local _ = load_extention("x-iced-cmp")
+    --     end,
+    -- },
 }
 
 local obsidian = {
