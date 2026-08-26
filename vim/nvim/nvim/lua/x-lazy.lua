@@ -151,19 +151,16 @@ local core = {
         },
         config = function()
             load_extention('x-telescope')
-            vim.keymap.set("n", '<Leader>ff', [[<CMD>lua require('x-telescope-builtin').find_files()<CR>]],
-                { silent = true, noremap = true })
-            vim.keymap.set("n", '<Leader>fb', [[<CMD>lua require('x-telescope-builtin').buffers()<CR>]],
-                { silent = true, noremap = true })
-            vim.keymap.set("n", '<Leader>fg', [[<CMD>lua require('x-telescope-builtin').live_grep()<CR>]],
-                { silent = true, noremap = true })
-            vim.keymap.set("n", '<Leader>fh', [[<CMD>lua require('x-telescope-builtin').help_tags()<CR>]],
-                { silent = true, noremap = true })
-            vim.keymap.set("n", "<Leader>fn", [[<CMD>lua require('x-telescope-file-browser').file_browser()<CR>]],
-                { silent = true, noremap = true })
-            vim.keymap.set("n", "<Leader>fp", [[<CMD>Telescope neoclip<CR>]], { silent = true, noremap = true })
-            vim.keymap.set("n", '<leader>fa', [[<CMD>Telescope aerial<CR>]], { silent = true, noremap = true })
-        end
+        end,
+        keys = {
+            { "<Leader>ff", [[<Plug>(x-telescope-find-files)]], },
+            { "<Leader>fb", [[<Plug>(x-telescope-buffers)]], },
+            { "<Leader>fg", [[<Plug>(x-telescope-live-grep)]], },
+            { "<Leader>fh", [[<Plug>(x-telescope-help-tags)]], },
+            { "<Leader>fn", [[<Plug>(x-telescope-file-browser)]], },
+            { "<Leader>fp", [[<CMD>Telescope neoclip<CR>]], },
+            { "<leader>fa", [[<CMD>Telescope aerial<CR>]], },
+        }
     },
     {
         "AckslD/nvim-neoclip.lua",
@@ -412,8 +409,6 @@ local ai = {
         },
     },
 }
-
-
 
 
 lazy.setup(concat(

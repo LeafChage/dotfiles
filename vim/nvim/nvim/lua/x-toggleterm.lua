@@ -6,5 +6,6 @@ end
 
 toggleterm.setup({
     open_mapping = [[<Leader>tt]],
-    direction = "float"
+    direction = "float",
+    shade_terminals = false
 })
