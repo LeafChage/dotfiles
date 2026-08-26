@@ -90,3 +90,5 @@ mcp-needs-auth-cache.json
 /telemetry
 daemon-auth-cooldown
 daemon-auth-status.json
+
+uploads
