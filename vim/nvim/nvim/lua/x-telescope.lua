@@ -24,6 +24,7 @@ telescope.setup({
 telescope.load_extension("file_browser")
 telescope.load_extension("neoclip")
 telescope.load_extension("aerial")
+telescope.load_extension("tt")
 
 -- define command
 local config = { remap = true, silent = true }

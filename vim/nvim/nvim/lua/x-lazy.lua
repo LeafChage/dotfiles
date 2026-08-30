@@ -48,14 +48,6 @@ local other = {
         'simeji/winresizer',
     },
     {
-        -- float terminal
-        'akinsho/toggleterm.nvim',
-        version = "*",
-        config = function()
-            load_extention("x-toggleterm")
-        end
-    },
-    {
         -- better f
         'ggandor/lightspeed.nvim',
         config = function()
@@ -160,6 +152,7 @@ local core = {
             { "<Leader>fn", [[<Plug>(x-telescope-file-browser)]], },
             { "<Leader>fp", [[<CMD>Telescope neoclip<CR>]], },
             { "<leader>fa", [[<CMD>Telescope aerial<CR>]], },
+            { "<leader>ft", [[<CMD>Telescope tt<CR>]], },
         }
     },
     {
@@ -232,15 +225,26 @@ local ruby = {
     }
 }
 
-local local_plugins = {
+local lua = {
+    {
+        "folke/lazydev.nvim",
+        ft = { "lua" },
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
 }
 
-local copilot = {
+local local_plugins = {
     {
-        "github/copilot.vim",
+        dir = "~/project/tt",
         config = function()
-            load_extention("x-copilot")
-        end
+            require("tt").setup({
+                layout = "float",
+            })
+        end,
     }
 }
 
@@ -340,42 +344,6 @@ local clj = {
         config = function()
         end,
     },
-    -- {
-    --     "liquidz/vim-iced",
-    --     dependencies = { "guns/vim-sexp" },
-    --     ft = { "clojure" },
-    --     init = function()
-    --         vim.g.iced_enable_default_key_mappings = false
-    --         vim.g["iced#cljs#default_env"] = "figwheel-main"
-    --     end,
-    --     config = function()
-    --         local _ = load_extention("x-iced")
-    --     end,
-    --     keys = {
-    --         { "<Leader>rr", [[<Plug>(iced_connect)]],                        mode = "n" },
-    --         { "<Leader>rj", [[<Plug>(iced_jack_in)]],                        mode = "n" },
-    --         { "<Leader>sv", [[<Plug>(iced_eval)<Plug>(sexp_inner_element)]], mode = "n" },
-    --         { '<Leader>ss', [[<Plug>(iced_eval)<Plug>(sexp_outer_list)]],    mode = "n" },
-    --         { '<Leader>st', [[<Plug>(iced_eval_outer_top_list)]],            mode = "n" },
-    --         { '<Leader>so', [[<Plug>(iced_stdout_buffer_toggle)]],           mode = "n" },
-    --         { '<Leader>jj', [[<Plug>(iced_def_jump)]],                       mode = "n" },
-    --         { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
-    --         { '<Leader>k',  [[<Plug>(iced_document_popup_open)]],            mode = "n" },
-    --         { '<Leader>K',  [[<Plug>(iced_document_open)]],                  mode = "n" },
-    --         { '==',         [[<Plug>(iced_format)]],                         mode = "n" },
-    --         { '<Leader>f',  [[<Plug>(iced_format_all)]],                     mode = "n" },
-    --     }
-    -- },
-    -- {
-    --     "lamp/cmp-iced",
-    --     dependencies = {
-    --         'hrsh7th/nvim-cmp',
-    --     },
-    --     ft = { "clojure" },
-    --     config = function()
-    --         local _ = load_extention("x-iced-cmp")
-    --     end,
-    -- },
 }
 
 local obsidian = {
@@ -417,6 +385,7 @@ lazy.setup(concat(
     , colorscheme
     , markdown
     , ruby
+    , lua
     , local_plugins
     , lisp
     , clj

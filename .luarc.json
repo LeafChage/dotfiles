@@ -1,0 +1,11 @@
+{
+  "diagnostics.disable": [
+    "undefined-doc-name",
+        "unused-function"
+  ],
+  "format.enable": true,
+  "format.defaultConfig": {
+    "indent_style": "space",
+    "indent_size": "2"
+  }
+}
