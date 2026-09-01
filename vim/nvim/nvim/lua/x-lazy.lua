@@ -239,7 +239,8 @@ local lua = {
 
 local local_plugins = {
     {
-        dir = "~/project/tt",
+        -- dir = "~/project/tt",
+        "LeafChage/tt",
         config = function()
             require("tt").setup({
                 layout = "float",
@@ -346,39 +347,6 @@ local clj = {
     },
 }
 
-local obsidian = {
-    {
-        "epwalsh/obsidian.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", },
-        ft = { "markdown", "md" },
-        config = function()
-            local _ = load_extention("x-obsidian");
-        end,
-        keys = {
-            { "<Leader>ot", [[<cmd>ObsidianTags<CR>]],        desc = "search file by tags" },
-            { "<Leader>of", [[<cmd>ObsidianQuickSwitch<CR>]], desc = "search file" },
-            { "<Leader>on", [[<cmd>ObsidianRename<CR>]],      desc = "rename this file" },
-            { "<Leader>od", [[<cmd>ObsidianUnlink<CR>]],      desc = "remove this file" },
-        }
-    }
-}
-
-local ai = {
-    {
-        "olimorris/codecompanion.nvim",
-        version = "^18.0.0",
-        opts = {},
-        config = function()
-            local _ = load_extention("x-codecompanion");
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-    },
-}
-
-
 lazy.setup(concat(
     other
     , core
@@ -390,6 +358,4 @@ lazy.setup(concat(
     , lisp
     , clj
     , dap
-    -- , obsidian
-    , ai
 ), {})
