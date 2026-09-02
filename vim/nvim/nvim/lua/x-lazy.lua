@@ -134,7 +134,16 @@ local core = {
     --- fuzzy finder
     ---
     {
+        "LeafChage/tt",
+        config = function()
+            require("tt").setup({
+                layout = "float",
+            })
+        end,
+    },
+    {
         'nvim-telescope/telescope.nvim',
+        lazy = false,
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
@@ -238,15 +247,6 @@ local lua = {
 }
 
 local local_plugins = {
-    {
-        -- dir = "~/project/tt",
-        "LeafChage/tt",
-        config = function()
-            require("tt").setup({
-                layout = "float",
-            })
-        end,
-    }
 }
 
 local dap = {
