@@ -43,12 +43,12 @@ end
 vim.opt.rtp:prepend(vim.fn.expand(vim_setting_dir))
 vim.opt.rtp:prepend(lazypath)
 
-vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, "fast.vim")))
-require("x-fast")
+require("fast")
+require("syntax")
 require("x-lazy")
 vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'common.vim')))
 require("keymap")
-vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'color.vim')))
+-- vim.cmd.source(vim.fn.expand(path.join(vim_setting_dir, 'color.vim')))
 require("command")
 
 vim.g.python_host_prog = os.getenv("NEOVIM_PYTHON_PATH") or '/usr/bin/python'

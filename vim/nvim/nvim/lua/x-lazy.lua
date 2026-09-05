@@ -162,6 +162,7 @@ local core = {
             { "<Leader>fp", [[<CMD>Telescope neoclip<CR>]], },
             { "<leader>fa", [[<CMD>Telescope aerial<CR>]], },
             { "<leader>ft", [[<CMD>Telescope tt<CR>]], },
+            { "<leader>tt", [[<CMD>Telescope tt<CR>]], },
         }
     },
     {
